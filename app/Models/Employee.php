@@ -11,9 +11,21 @@ class Employee extends Authenticatable
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'employee_id ',
+        'company_location',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'birthday',
+        'gender',
+        'personal_phone',
+        'personal_email',
+        'nid',
+        'address',
+        'department',
+        'degree',
+        'profile_pic',
     ];
 
     protected $hidden = [

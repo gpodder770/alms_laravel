@@ -29,9 +29,15 @@ Route::controller(EmployeeController::class)->prefix('employee')->as('employee.'
         Route::get('dashboard','dashboard')->name('dashboard');
 
         Route::get('/profile', 'profile')->name('profile');
+
         Route::get('/change_password', 'change_password')->name('change_password');
+        Route::put('/change_password_submit', 'change_password_submit')->name('change_password_submit');
+
         Route::get('/attendance', 'attendance')->name('attendance');
+
         Route::get('/apply_leave', 'apply_leave')->name('apply_leave');
+        Route::post('/apply_leave_submit', 'apply_leave_submit')->name('apply_leave_submit');
+        
 
     });
 

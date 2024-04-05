@@ -110,29 +110,28 @@
                     <div class="card-body">
                         <h4 class="card-title">Apply Leave Form</h4>
                         {{-- <p class="card-title-desc">Your Information</p> --}}
-                        <form class="row g-3 needs-validation" action="" method="post">
+                        <form action="{{ route('employee.apply_leave_submit') }}" method="post">
                             @csrf
                             <div class="col-md-4">
                                 <label for="leavetype" class="form-label">Leave Type</label>
                                 <select class="form-select" id="leavetype" name="leavetype" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option value="1">Sick</option>
-                                    <option value="2">Halfday</option>
-                                    <option value="3">Public</option>
-                                    <option value="4">Casual</option>
-                                    <option value="5">Special</option>
-                                    <option value="6">Earned</option>
+                                    <option value="">Choose Leave Type</option>
+                                    <option value="0">Sick</option>
+                                    <option value="1">Halfday</option>
+                                    <option value="2">Public</option>
+                                    <option value="3">Casual</option>
+                                    <option value="4">Special</option>
+                                    <option value="5">Earned</option>
                                 </select>
                                 @error('leavetype')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            
 
                             <div class="col-md-4">
                                 <label for="startdate" class="form-label">Start Date</label>
                                 <div class="input-group has-validation">
-                                    <input type="date" class="form-control" id="startdate" name="startdate">
+                                    <input type="date" class="form-control" id="startdate" name="startdate" required>
                                 </div>
                                 @error('startdate')
                                     <div class="alert alert-danger">{{ $message }}</div>

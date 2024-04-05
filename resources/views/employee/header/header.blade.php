@@ -29,7 +29,7 @@
             <div class="dropdown d-inline-block ms-2">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-6.jpg" alt="Header Avatar">
-                    <span class="d-none d-md-inline-block ms-1">{{ Auth::guard('employee')->user()->name }}<i class="mdi mdi-chevron-down"></i> </span>
+                    <span class="d-none d-md-inline-block ms-1">{{ Auth::guard('employee')->user()->first_name." ".Auth::guard('employee')->user()->last_name }}<i class="mdi mdi-chevron-down"></i> </span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
