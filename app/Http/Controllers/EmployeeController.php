@@ -142,8 +142,21 @@ class EmployeeController extends Controller
                 $endDate = Carbon::parse($request->end_date);
                 $diffInDays = $startDate->diffInDays($endDate) + 1;
                 $num_of_weekend_between_dates = $startDate->diffInDaysFiltered(function (Carbon $date){return !$date->isWeekday();}, $endDate);
-                $num_of_govt_holidays = Holidays::where('company_location',0)->whereBetween('date',[$request->start_date,$request->end_date])->get()->count();
-                $total_num_of_holidays = $diffInDays - $num_of_weekend_between_dates - $num_of_govt_holidays;
+                $govt_holidays = Holidays::where('company_location',0)->whereBetween('date',[$request->start_date,$request->end_date])->get();
+                $num_of_govt_holidays = $govt_holidays->count();
+                $num_of_govt_holidays_without_weekend = 0;
+                if($num_of_govt_holidays == 0){
+                    $total_num_of_holidays = $diffInDays - $num_of_weekend_between_dates - $num_of_govt_holidays;
+                }else{
+                    foreach ($govt_holidays as $each_num_of_govt_holidays) {
+                        $day_date = Carbon::createFromFormat('Y-m-d', $each_num_of_govt_holidays->date)->format('l');
+
+                        if($day_date == "Friday" || $day_date == "Saturday"){
+                            $num_of_govt_holidays_without_weekend = $num_of_govt_holidays - 1;
+                        }
+                    }
+                    $total_num_of_holidays = $diffInDays - $num_of_weekend_between_dates - $num_of_govt_holidays_without_weekend;
+                }
                 $data = [
                     'e_id'=>Auth::guard('employee')->user()->id,
                     'leave_type'=>$request->leave_type,
@@ -153,7 +166,7 @@ class EmployeeController extends Controller
                     'leave_reason'=>$request->leave_reason,
                     'status'=>0,
                 ];
-
+                dd($data);
                 $create_holiday = EmployeesLeave::create($data);
 
                 if ($create_holiday) {
@@ -191,8 +204,21 @@ class EmployeeController extends Controller
                 $endDate = Carbon::parse($request->end_date);
                 $diffInDays = $startDate->diffInDays($endDate) + 1;
                 $num_of_weekend_between_dates = $startDate->diffInDaysFiltered(function (Carbon $date){return !$date->isWeekday();}, $endDate);
-                $num_of_govt_holidays = Holidays::where('company_location',1)->whereBetween('date',[$request->start_date,$request->end_date])->get()->count();
-                $total_num_of_holidays = $diffInDays - $num_of_weekend_between_dates - $num_of_govt_holidays;
+                $govt_holidays = Holidays::where('company_location',0)->whereBetween('date',[$request->start_date,$request->end_date])->get();
+                $num_of_govt_holidays = $govt_holidays->count();
+                $num_of_govt_holidays_without_weekend = 0;
+                if($num_of_govt_holidays == 0){
+                    $total_num_of_holidays = $diffInDays - $num_of_weekend_between_dates - $num_of_govt_holidays;
+                }else{
+                    foreach ($govt_holidays as $each_num_of_govt_holidays) {
+                        $day_date = Carbon::createFromFormat('Y-m-d', $each_num_of_govt_holidays->date)->format('l');
+
+                        if($day_date == "Saturday" || $day_date == "Sunday"){
+                            $num_of_govt_holidays_without_weekend = $num_of_govt_holidays - 1;
+                        }
+                    }
+                    $total_num_of_holidays = $diffInDays - $num_of_weekend_between_dates - $num_of_govt_holidays_without_weekend;
+                }
                 $data = [
                     'e_id'=>Auth::guard('employee')->user()->id,
                     'leave_type'=>$request->leave_type,
