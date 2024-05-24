@@ -15,6 +15,8 @@
     <link href="{{ asset('vendor/foxia/css/icons.min.css') }}" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="{{ asset('vendor/foxia/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}">
 @endpush
 
 @section('body')
@@ -23,7 +25,7 @@
             <div class="col-12 col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Change Password</h4>
+                        <h4 class="card-title">Attendance</h4>
                         @if ($message = Session::get('success'))
                             <div class="alert alert-success">
                                 <strong>{{ $message }}</strong>
@@ -34,34 +36,33 @@
                                 <strong>{{ $message }}</strong>
                             </div>
                         @endif
-                        <p class="card-title-desc">Your Information</p>
-                        <form class="row g-3 needs-validation" novalidate>
-
+                        <form action="" method="post" class="row g-3 needs-validation" novalidate>
+@csrf
                             <div class="col-md-4">
-                                <label for="validationDOB" class="form-label">Date</label>
+                                <label class="form-label">Date</label>
                                 <div class="input-group has-validation">
-                                    <input type="date" class="form-control" id="validationDOB" name="dob">
+                                    <input type="date" class="form-control" id="date" name="date" required>
                                 </div>
                                 <div class="invalid-feedback">
                                     Please enter email.
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                
+
                             </div>
                             <div class="col-md-4">
-                                <label for="validationDOB" class="form-label">Start Time</label>
+                                <label class="form-label">Start Time</label>
                                 <div class="input-group has-validation">
-                                    <input type="date" class="form-control" id="validationDOB" name="dob">
+                                    <input type="date" class="form-control" id="time" name="start_time">
                                 </div>
                                 <div class="invalid-feedback">
                                     Please enter email.
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="validationDOB" class="form-label">End Time</label>
+                                <label class="form-label">End Time</label>
                                 <div class="input-group has-validation">
-                                    <input type="date" class="form-control" id="validationDOB" name="dob">
+                                    <input type="date" class="form-control" id="time" name="end_time">
                                 </div>
                                 <div class="invalid-feedback">
                                     Please enter email.
@@ -69,7 +70,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label">Reason for Leave</label>
-                                <textarea id="textarea" class="form-control" maxlength="225" rows="3"
+                                <textarea id="textarea" class="form-control" maxlength="225" rows="3" name="reason"
                                     placeholder="This textarea has a limit of 225 chars."></textarea>
                                 <div class="invalid-feedback">
                                     Please provide a valid zip.
@@ -161,14 +162,46 @@
     {{-- Stopping user from applying leave beyond or before the current year and before currentdate --}}
     <script>
         var year = new Date().getFullYear();
+        const today = new Date();
+        const earlyThreeDays = new Date(today.setDate(today.getDate() - 3));
+        const company_location = {{ Auth::guard('employee')->user()->company_location }};
+        // console.log(today);
 
-        flatpickr("#start_date", {
-            minDate: "today",
-            maxDate: year + "-12-31",
-        });
-        flatpickr("#end_date", {
-            minDate: "today",
-            maxDate: year + "-12-31",
+        if (company_location == 0) {
+            flatpickr("#date", {
+                minDate: earlyThreeDays,
+                maxDate: "today",
+                disable: [
+                    function(date) {
+                        // Fridays
+                        return date.getDay() === 5;
+                    },
+                    function(date) {
+                        // Saturdays
+                        return date.getDay() === 6;
+                    }
+                ]
+            });
+        } else {
+            flatpickr("#date", {
+                minDate: earlyThreeDays,
+                maxDate: "today",
+                disable: [
+                    function(date) {
+                        // Sundays
+                        return date.getDay() === 0;
+                    },
+                    function(date) {
+                        // Saturdays
+                        return date.getDay() === 6;
+                    }
+                ]
+            });
+        }
+        flatpickr("#time", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
         });
     </script>
 @endpush

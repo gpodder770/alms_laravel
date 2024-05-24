@@ -138,7 +138,7 @@
                                 <label for="start_date" class="form-label">Start Date<span
                                         style="color:red">*</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" id="start_date" name="start_date"
+                                    <input type="date" class="form-control" id="start_date" name="start_date"
                                         required>
                                 </div>
                                 @error('start_date')
@@ -261,14 +261,75 @@
     {{-- Stopping user from applying leave beyond or before the current year and before currentdate --}}
     <script>
         var year = new Date().getFullYear();
+        const company_location = {{ Auth::guard('employee')->user()->company_location }};
 
-        flatpickr("#start_date", {
-            minDate: "today",
-            maxDate: year + "-12-31",
-        });
-        flatpickr("#end_date", {
-            minDate: "today",
-            maxDate: year + "-12-31",
-        });
+        if (company_location == 0) {
+            flatpickr("#start_date", {
+                minDate: "today",
+                maxDate: year + "-12-31",
+                disable: [
+                    function(date) {
+                        // Fridays
+                        return date.getDay() === 5;
+                    },
+                    function(date) {
+                        // Saturdays
+                        return date.getDay() === 6;
+                    }
+                ]
+            });
+            flatpickr("#end_date", {
+                minDate: "today",
+                maxDate: year + "-12-31",
+                disable: [
+                    function(date) {
+                        // Fridays
+                        return date.getDay() === 5;
+                    },
+                    function(date) {
+                        // Saturdays
+                        return date.getDay() === 6;
+                    }
+                ]
+            });
+        }else{
+            flatpickr("#start_date", {
+                minDate: "today",
+                maxDate: year + "-12-31",
+                disable: [
+                    function(date) {
+                        // Sundays
+                        return date.getDay() === 0;
+                    },
+                    function(date) {
+                        // Saturdays
+                        return date.getDay() === 6;
+                    }
+                ]
+            });
+            flatpickr("#end_date", {
+                minDate: "today",
+                maxDate: year + "-12-31",
+                disable: [
+                    function(date) {
+                        // Sundays
+                        return date.getDay() === 0;
+                    },
+                    function(date) {
+                        // Saturdays
+                        return date.getDay() === 6;
+                    }
+                ]
+            });
+        }
+
+        // flatpickr("#start_date", {
+        //     minDate: "today",
+        //     maxDate: year + "-12-31",
+        // });
+        // flatpickr("#end_date", {
+        //     minDate: "today",
+        //     maxDate: year + "-12-31",
+        // });
     </script>
 @endpush
