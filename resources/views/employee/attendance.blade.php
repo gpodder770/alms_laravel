@@ -24,6 +24,16 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Change Password</h4>
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @endif
+                        @if ($message = Session::get('error'))
+                            <div class="alert alert-danger">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @endif
                         <p class="card-title-desc">Your Information</p>
                         <form class="row g-3 needs-validation" novalidate>
 
@@ -143,5 +153,22 @@
             lengthChange: !1,
             buttons: ["copy", "excel", "pdf", "colvis"]
         }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+    </script>
+
+    {{-- Intializing Flatpickr --}}
+    <script src="{{ asset('js/flatpickr.min.js') }}"></script>
+
+    {{-- Stopping user from applying leave beyond or before the current year and before currentdate --}}
+    <script>
+        var year = new Date().getFullYear();
+
+        flatpickr("#start_date", {
+            minDate: "today",
+            maxDate: year + "-12-31",
+        });
+        flatpickr("#end_date", {
+            minDate: "today",
+            maxDate: year + "-12-31",
+        });
     </script>
 @endpush

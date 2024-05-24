@@ -12,6 +12,7 @@ use DB;
 use App\Models\Employee;
 use App\Models\EmployeesLeave;
 use App\Models\Holidays;
+use App\Models\Holidays_view;
 use App\Models\LeavePolicy;
 
 class EmployeeController extends Controller
@@ -51,7 +52,12 @@ class EmployeeController extends Controller
 
     public function dashboard()
     {
-        return view('employee.dashboard');
+        $holidays = Holidays_view::whereYear('date',Carbon::now()->format('Y'))->whereDate('date', '>=', Carbon::now())->limit(5)->get();
+        $holiday_array_size = $holidays->count();
+        // dd($holidays->count());
+        $all_leave_info  = EmployeesLeave::whereYear('start_date',Carbon::now()->format('Y'))->latest()->limit(5)->get();
+        $all_leave_info_array_size = $all_leave_info->count();
+        return view('employee.dashboard',compact('holidays','holiday_array_size','all_leave_info','all_leave_info_array_size'));
     }
 
     public function profile(){

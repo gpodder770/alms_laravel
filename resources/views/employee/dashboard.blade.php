@@ -23,17 +23,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($holidays as $each_holiday)
-                                    <tr>
-                                        {{-- <th scope="row">#16252</th> --}}
-                                        <td>{{ $each_holiday->date }}</td>
-                                        <td>{{ $each_holiday->name_of_day }}</td>
-                                        <td>{{ $each_holiday->occasion }}</td>
-                                        <td>{{ $each_holiday->days_left > 0 ? $each_holiday->days_left ." ".'days' : 'Today' }}</td>
-                                        {{-- <td>$80</td> --}}
-                                    </tr>
-                                    @endforeach
-                                    
+                                    @if ($holiday_array_size == 0)
+                                        <tr>
+                                            <td colspan="4" class="text-center">No Records Found</td>
+                                        </tr>
+                                    @else
+                                        @foreach ($holidays as $each_holiday)
+                                            <tr>
+                                                {{-- <th scope="row">#16252</th> --}}
+                                                <td>{{ $each_holiday->date }}</td>
+                                                <td>{{ $each_holiday->name_of_day }}</td>
+                                                <td>{{ $each_holiday->occasion }}</td>
+                                                <td>{{ $each_holiday->days_left > 0 ? $each_holiday->days_left . ' ' . 'days' : 'Today' }}
+                                                </td>
+                                                {{-- <td>$80</td> --}}
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -87,37 +93,44 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($all_leave_info as $each_all_leave_info)
+                                    @if ($all_leave_info_array_size == 0)
                                         <tr>
-                                            {{-- type --}}
-                                            @if ($each_all_leave_info->leave_type == 0)
-                                                <td>Sick</td>
-                                            @elseif ($each_all_leave_info->leave_type == 1)
-                                                <td>Public</td>
-                                            @elseif ($each_all_leave_info->leave_type == 2)
-                                                <td>Casual</td>
-                                            @elseif ($each_all_leave_info->leave_type == 3)
-                                                <td>Special</td>
-                                            @elseif ($each_all_leave_info->leave_type == 4)
-                                                <td>Earned</td>
-                                            @endif
-                                            {{-- type --}}
-                                            <td>{{ $each_all_leave_info->start_date }}</td>
-                                            <td>{{ $each_all_leave_info->end_date }}</td>
-                                            <td>{{ $each_all_leave_info->number_of_days }}</td>
-                                            <td>{{ $each_all_leave_info->leave_reason }}</td>
-                                            {{-- status --}}
-                                            @if ($each_all_leave_info->status == 0)
-                                                <td class="badge bg-warning">Pending</td>
-                                            @elseif ($each_all_leave_info->status == 1)
-                                                <td class="badge bg-success">Approved</td>
-                                            @else
-                                                <td class="badge bg-danger">Cancelled</td>
-                                            @endif
-                                            {{-- status --}}
-                                            <td>{{ $each_all_leave_info->comment }}</td>
+                                            <td colspan="7" class="text-center">No Records Found</td>
                                         </tr>
-                                    @endforeach
+                                    @else
+                                        @foreach ($all_leave_info as $each_all_leave_info)
+                                            <tr>
+                                                {{-- type --}}
+                                                @if ($each_all_leave_info->leave_type == 0)
+                                                    <td>Sick</td>
+                                                @elseif ($each_all_leave_info->leave_type == 1)
+                                                    <td>Public</td>
+                                                @elseif ($each_all_leave_info->leave_type == 2)
+                                                    <td>Casual</td>
+                                                @elseif ($each_all_leave_info->leave_type == 3)
+                                                    <td>Special</td>
+                                                @elseif ($each_all_leave_info->leave_type == 4)
+                                                    <td>Earned</td>
+                                                @endif
+                                                {{-- type --}}
+                                                <td>{{ $each_all_leave_info->start_date }}</td>
+                                                <td>{{ $each_all_leave_info->end_date }}</td>
+                                                <td>{{ $each_all_leave_info->number_of_days }}</td>
+                                                <td>{{ $each_all_leave_info->leave_reason }}</td>
+                                                {{-- status --}}
+                                                @if ($each_all_leave_info->status == 0)
+                                                    <td class="badge bg-warning">Pending</td>
+                                                @elseif ($each_all_leave_info->status == 1)
+                                                    <td class="badge bg-success">Approved</td>
+                                                @else
+                                                    <td class="badge bg-danger">Cancelled</td>
+                                                @endif
+                                                {{-- status --}}
+                                                <td>{{ $each_all_leave_info->comment }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+
                                 </tbody>
                             </table>
                         </div>

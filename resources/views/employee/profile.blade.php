@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label class="form-label">Address</label>
-                            <textarea id="textarea" class="form-control" name="address" maxlength="225" rows="3">{{ $employee_info->address }}</textarea>
+                            <textarea id="textarea" class="form-control" name="address" maxlength="225" rows="3" disabled>{{ $employee_info->address }}</textarea>
                             <div class="invalid-feedback">
                                 Please enter Address.
                             </div>
