@@ -26,7 +26,7 @@
     <body data-topbar="colored" data-layout="horizontal">
 
         <!-- Loader -->
-        <div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+        {{-- <div id="preloader"><div id="status"><div class="spinner"></div></div></div> --}}
 
         <!-- Begin page -->
         <div id="layout-wrapper">

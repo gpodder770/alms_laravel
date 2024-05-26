@@ -1,12 +1,16 @@
 @extends('employee.auth.layout.app')
 
+@push('css')
+    
+@endpush
+
 @section('body')
     <!-- Loader -->
-    <div id="preloader">
+    {{-- <div id="preloader">
         <div id="status">
             <div class="spinner"></div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Begin page -->
     <div class="accountbg"></div>

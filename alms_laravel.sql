@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 06, 2024 at 08:36 PM
+-- Generation Time: May 26, 2024 at 07:20 PM
 -- Server version: 10.10.2-MariaDB
--- PHP Version: 7.3.33
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -374,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DROP TABLE IF EXISTS `holidays_with_day_datediff`;
 
 DROP VIEW IF EXISTS `holidays_with_day_datediff`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `holidays_with_day_datediff`  AS SELECT `holidays`.`date` AS `date`, dayname(`holidays`.`date`) AS `name_of_day`, `holidays`.`occasion` AS `occasion`, `holidays`.`company_location` AS `company_location`, to_days(`holidays`.`date`) - to_days(curdate()) AS `days_left` FROM `holidays``holidays`  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `holidays_with_day_datediff`  AS SELECT `holidays`.`date` AS `date`, dayname(`holidays`.`date`) AS `name_of_day`, `holidays`.`occasion` AS `occasion`, `holidays`.`company_location` AS `company_location`, to_days(`holidays`.`date`) - to_days(curdate()) AS `days_left` FROM `holidays`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
