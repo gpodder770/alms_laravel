@@ -1,5 +1,9 @@
 @extends('employee.layout.app')
 
+@section('title')
+    <title>Employee | Change Password</title>
+@endsection
+
 @section('body')
     <div class="container">
         <div class="row d-flex justify-content-center">

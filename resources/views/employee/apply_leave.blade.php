@@ -1,5 +1,9 @@
 @extends('employee.layout.app')
 
+@section('title')
+    <title>Employee | Apply Leave</title>
+@endsection
+
 @push('css')
     <!-- DataTables -->
     <link href="{{ asset('vendor/foxia/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} " rel="stylesheet"
@@ -213,11 +217,11 @@
                                         <td>{{ $each_all_leave_info->leave_reason }}</td>
                                         {{-- status --}}
                                         @if ($each_all_leave_info->status == 0 )
-                                            <td class="badge bg-warning">Pending</td>
+                                            <td><h5><span class="badge bg-warning">Pending</span></h5></td>
                                         @elseif ($each_all_leave_info->status == 1 )
-                                            <td class="badge bg-success">Approved</td>
+                                            <td><h5><span class="badge bg-success">Approved</span></h5></td>
                                         @else
-                                            <td class="badge bg-danger">Cancelled</td>
+                                            <td><h5><span class="badge bg-danger">Cancelled</span></h5></td>
                                         @endif
                                         {{-- status --}}
                                         <td>{{ $each_all_leave_info->comment }}</td>

@@ -1,5 +1,9 @@
 @extends('employee.layout.app')
 
+@section('title')
+    <title>Employee | Attendance</title>
+@endsection
+
 @push('css')
     <!-- DataTables -->
     <link href="{{ asset('vendor/foxia/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} " rel="stylesheet"

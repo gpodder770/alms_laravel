@@ -1,5 +1,9 @@
 @extends('employee.layout.app')
 
+@section('title')
+    <title>Employee | Profile</title>
+@endsection
+
 @section('body')
 <div class="container">
     <div class="row">

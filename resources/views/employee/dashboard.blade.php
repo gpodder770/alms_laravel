@@ -1,5 +1,9 @@
 @extends('employee.layout.app')
 
+@section('title')
+    <title>Employee | Dashboard</title>
+@endsection
+
 @section('body')
     <div class="container-fluid">
 
@@ -118,13 +122,13 @@
                                                 <td>{{ $each_all_leave_info->number_of_days }}</td>
                                                 <td>{{ $each_all_leave_info->leave_reason }}</td>
                                                 {{-- status --}}
-                                                @if ($each_all_leave_info->status == 0)
-                                                    <td class="badge bg-warning">Pending</td>
-                                                @elseif ($each_all_leave_info->status == 1)
-                                                    <td class="badge bg-success">Approved</td>
-                                                @else
-                                                    <td class="badge bg-danger">Cancelled</td>
-                                                @endif
+                                                @if ($each_all_leave_info->status == 0 )
+                                            <td><h5><span class="badge bg-warning">Pending</span></h5></td>
+                                        @elseif ($each_all_leave_info->status == 1 )
+                                            <td><h5><span class="badge bg-success">Approved</span></h5></td>
+                                        @else
+                                            <td><h5><span class="badge bg-danger">Cancelled</span></h5></td>
+                                        @endif
                                                 {{-- status --}}
                                                 <td>{{ $each_all_leave_info->comment }}</td>
                                             </tr>
