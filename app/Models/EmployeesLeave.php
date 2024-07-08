@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class EmployeesLeave extends Model
 {
     use HasFactory;
+    
     protected $table = "employee_leave";
+
     protected $fillable = [
-        'e_id',
+        'employee_id',
         'leave_type',
         'start_date',
         'end_date',

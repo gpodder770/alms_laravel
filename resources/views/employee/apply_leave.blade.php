@@ -186,6 +186,7 @@
                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
+                                    <th>SL</th>
                                     <th>Type</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
@@ -198,6 +199,7 @@
                             <tbody>
                                 @foreach ($all_leave_info as $each_all_leave_info)
                                     <tr>
+                                        <td>{{ $lopp->iteration }}</td>
                                         {{-- type --}}
                                         @if ($each_all_leave_info->leave_type == 0 )
                                             <td>Sick</td>

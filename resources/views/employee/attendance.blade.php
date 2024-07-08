@@ -40,12 +40,12 @@
                                 <strong>{{ $message }}</strong>
                             </div>
                         @endif
-                        <form action="" method="post" class="row g-3 needs-validation" novalidate>
-@csrf
+                        <form action="{{ route('employee.attendance_leave_submit') }}" method="post" class="row g-3 needs-validation" novalidate>
+                            @csrf
                             <div class="col-md-4">
-                                <label class="form-label">Date</label>
+                                <label class="form-label">Attendance Date</label>
                                 <div class="input-group has-validation">
-                                    <input type="date" class="form-control" id="date" name="date" required>
+                                    <input type="date" class="form-control" id="date" name="attendace_date" required>
                                 </div>
                                 <div class="invalid-feedback">
                                     Please enter email.
@@ -94,37 +94,29 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title">Buttons example</h4>
-                        <p class="card-title-desc">The Buttons extension for DataTables
-                            provides a common set of options, API methods and styling to display
-                            buttons on a page that will interact with a DataTable. The core library
-                            provides the based framework upon which plug-ins can built.
-                        </p>
+                        <h4 class="card-title">Attendance Applied</h4>
 
                         <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>SL</th>
+                                    <th>Attendance Date</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Reason</th>
                                 </tr>
                             </thead>
-
-
                             <tbody>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
-                                </tr>
-
+                                @foreach ($all_attendace_info as $each_attendace_info)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{$each_attendace_info->attendace_date}}</td>
+                                        <td>{{$each_attendace_info->start_time}}</td>
+                                        <td>{{$each_attendace_info->end_time}}</td>
+                                        <td>{{$each_attendace_info->reason}}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
 

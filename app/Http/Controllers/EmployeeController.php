@@ -14,6 +14,7 @@ use App\Models\EmployeesLeave;
 use App\Models\Holidays;
 use App\Models\Holidays_view;
 use App\Models\LeavePolicy;
+use App\Models\Attendance;
 
 class EmployeeController extends Controller
 {
@@ -65,9 +66,11 @@ class EmployeeController extends Controller
         // dd($employee_info);
         return view('employee.profile',compact('employee_info'));
     }
+
     public function change_password(){
         return view('employee.change_password');
     }
+
     public function change_password_submit(Request $request){
         // dd($request);
         $request->validate([
@@ -99,12 +102,40 @@ class EmployeeController extends Controller
         }
         return view('employee.change_password');
     }
+
     public function attendance(){
-        return view('employee.attendance');
+        $all_attendace_info = Attendance::where('employee_id',Auth::guard('employee')->user()->id)->whereYear('created_at', Carbon::now()->format('Y'))->get();
+        return view('employee.attendance',compact('all_attendace_info'));
     }
+
+    public function attendance_leave_submit(Request $request){
+        $request->validate([
+            'attendace_date' =>'required | date',
+            'start_time' =>'required | date_format:H:i',
+            'end_time' =>'required | date_format:H:i',
+            'reason' =>'required',
+        ]);
+
+        $data = [
+            'employee_id'=>Auth::guard('employee')->user()->id,
+            'attendace_date' =>$request->attendace_date,
+            'start_time' =>$request->start_time,
+            'end_time' =>$request->end_time,
+            'reason' =>$request->reason,
+        ];
+
+        $create_attendace = Attendance::create($data);
+
+        if ($create_attendace) {
+            return back()->with('success', 'Attendance Added Successfully');
+        } else {
+            return back()->with('error', 'Something went Wrong!');
+        }
+    }
+
     public function apply_leave(){
         // $old_leave_info = EmployeesLeave::where('e_id',Auth::guard('employee')->user()->id)->get();
-        $all_leave_info = EmployeesLeave::where('e_id',Auth::guard('employee')->user()->id)->whereYear('created_at', Carbon::now()->format('Y'))->get();
+        $all_leave_info = EmployeesLeave::where('employee_id',Auth::guard('employee')->user()->id)->whereYear('created_at', Carbon::now()->format('Y'))->get();
         if(Auth::guard('employee')->user()->company_location == 0){
             $leave_policy = LeavePolicy::where('company_location',0)->first();
             $sick = $leave_policy->sick;
@@ -199,7 +230,7 @@ class EmployeeController extends Controller
             if(($request->start_date == $request->end_date) || ($request->start_date && is_null($request->end_date))){
                 $diffInDays = 1;
                 $data = [
-                    'e_id'=>Auth::guard('employee')->user()->id,
+                    'employee_id'=>Auth::guard('employee')->user()->id,
                     'leave_type'=>$request->leave_type,
                     'start_date'=>$request->start_date,
                     'end_date'=>$request->end_date,
@@ -226,7 +257,7 @@ class EmployeeController extends Controller
                 $num_of_govt_holidays = Holidays::where('company_location',0)->whereBetween('date',[$request->start_date,$request->end_date])->get()->count();
                 $total_num_of_holidays = $diffInDays - $num_of_weekend_between_dates - $num_of_govt_holidays;
                 $data = [
-                    'e_id'=>Auth::guard('employee')->user()->id,
+                    'employee_id'=>Auth::guard('employee')->user()->id,
                     'leave_type'=>$request->leave_type,
                     'start_date'=>$request->start_date,
                     'end_date'=>$request->end_date,
@@ -248,7 +279,7 @@ class EmployeeController extends Controller
             if(($request->start_date == $request->end_date) || ($request->start_date && is_null($request->end_date))){
                 $diffInDays = 1;
                 $data = [
-                    'e_id'=>Auth::guard('employee')->user()->id,
+                    'employee_id'=>Auth::guard('employee')->user()->id,
                     'leave_type'=>$request->leave_type,
                     'start_date'=>$request->start_date,
                     'end_date'=>$request->end_date,
@@ -275,7 +306,7 @@ class EmployeeController extends Controller
                 $num_of_govt_holidays = Holidays::where('company_location',1)->whereBetween('date',[$request->start_date,$request->end_date])->get()->count();
                 $total_num_of_holidays = $diffInDays - $num_of_weekend_between_dates - $num_of_govt_holidays;
                 $data = [
-                    'e_id'=>Auth::guard('employee')->user()->id,
+                    'employee_id'=>Auth::guard('employee')->user()->id,
                     'leave_type'=>$request->leave_type,
                     'start_date'=>$request->start_date,
                     'end_date'=>$request->end_date,

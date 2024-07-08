@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: May 26, 2024 at 07:20 PM
--- Server version: 10.10.2-MariaDB
--- PHP Version: 8.0.26
+-- Host: 127.0.0.1:3307
+-- Generation Time: Jul 08, 2024 at 10:42 AM
+-- Server version: 11.3.2-MariaDB
+-- PHP Version: 8.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `alms_laravel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance`
+--
+
+DROP TABLE IF EXISTS `attendance`;
+CREATE TABLE IF NOT EXISTS `attendance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `employee_id` int(11) NOT NULL,
+  `attendace_date` date NOT NULL,
+  `start_time` varchar(255) NOT NULL,
+  `end_time` varchar(255) NOT NULL,
+  `reason` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`id`, `employee_id`, `attendace_date`, `start_time`, `end_time`, `reason`, `created_at`, `updated_at`) VALUES
+(1, 2, '2024-07-08', '12:00', '15:00', 'sdfsfsdf', '2024-07-08 10:31:10', '2024-07-08 10:31:10');
 
 -- --------------------------------------------------------
 
@@ -68,7 +94,7 @@ INSERT INTO `employees` (`id`, `employee_id`, `company_location`, `first_name`, 
 DROP TABLE IF EXISTS `employee_leave`;
 CREATE TABLE IF NOT EXISTS `employee_leave` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `e_id` varchar(255) NOT NULL,
+  `employee_id` varchar(255) NOT NULL,
   `leave_type` int(11) NOT NULL COMMENT '0 = Sick,\r\n1 = Public,\r\n2 = Casual,\r\n3 = Special,\r\n4 = Earned',
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
@@ -79,18 +105,8 @@ CREATE TABLE IF NOT EXISTS `employee_leave` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
-  KEY `e_id` (`e_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `employee_leave`
---
-
-INSERT INTO `employee_leave` (`id`, `e_id`, `leave_type`, `start_date`, `end_date`, `number_of_days`, `leave_reason`, `status`, `comment`, `created_at`, `updated_at`) VALUES
-(1, '2', 0, '2024-04-06', '2024-04-10', 4, 'sdfsdfsdfsd', 1, NULL, '2024-04-06 03:58:40', '2024-04-06 03:58:40'),
-(2, '2', 0, '2024-04-06', '2024-04-10', 55, 'sdfsdfsdfsd', 1, NULL, '2024-04-06 03:58:40', '2024-04-06 03:58:40'),
-(3, '2', 2, '2024-04-06', '2024-04-10', 22, 'sdfsdfsdfsd', 1, NULL, '2024-04-06 03:58:40', '2024-04-06 03:58:40'),
-(4, '2', 1, '2024-04-07', '2024-04-16', 8, 'dfdsfdsfdsfsd', 0, NULL, '2024-04-06 13:01:26', '2024-04-06 13:01:26');
+  KEY `e_id` (`employee_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -374,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DROP TABLE IF EXISTS `holidays_with_day_datediff`;
 
 DROP VIEW IF EXISTS `holidays_with_day_datediff`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `holidays_with_day_datediff`  AS SELECT `holidays`.`date` AS `date`, dayname(`holidays`.`date`) AS `name_of_day`, `holidays`.`occasion` AS `occasion`, `holidays`.`company_location` AS `company_location`, to_days(`holidays`.`date`) - to_days(curdate()) AS `days_left` FROM `holidays`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `holidays_with_day_datediff`  AS SELECT `holidays`.`date` AS `date`, dayname(`holidays`.`date`) AS `name_of_day`, `holidays`.`occasion` AS `occasion`, `holidays`.`company_location` AS `company_location`, to_days(`holidays`.`date`) - to_days(curdate()) AS `days_left` FROM `holidays` ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

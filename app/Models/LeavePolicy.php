@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class LeavePolicy extends Model
 {
     use HasFactory;
+    
     protected $table ="leave_policy";
+    
     protected $fillable = [
         'company_location',
         'sick',

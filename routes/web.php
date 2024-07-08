@@ -34,6 +34,7 @@ Route::controller(EmployeeController::class)->prefix('employee')->as('employee.'
         Route::put('/change_password_submit', 'change_password_submit')->name('change_password_submit');
 
         Route::get('/attendance', 'attendance')->name('attendance');
+        Route::post('/attendance_leave_submit', 'attendance_leave_submit')->name('attendance_leave_submit');
 
         Route::get('/apply_leave', 'apply_leave')->name('apply_leave');
         Route::post('/apply_leave_submit', 'apply_leave_submit')->name('apply_leave_submit');

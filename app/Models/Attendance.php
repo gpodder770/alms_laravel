@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Holidays extends Model
+class Attendance extends Model
 {
     use HasFactory;
-    
-    protected $table = "holidays";
-    
+
+    protected $table = 'attendance';
+
     protected $fillable = [
-        'date ',
-        'occasion',
-        'company_location',
+        'employee_id',
+        'attendace_date',
+        'start_time',
+        'end_time',
+        'reason',
     ];
 }
