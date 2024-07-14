@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,31 @@ Route::controller(EmployeeController::class)->prefix('employee')->as('employee.'
 
         Route::get('/apply_leave', 'apply_leave')->name('apply_leave');
         Route::post('/apply_leave_submit', 'apply_leave_submit')->name('apply_leave_submit');
+        
+
+    });
+
+});
+
+Route::controller(AdminController::class)->prefix('admin')->as('admin.')->group(function() {
+    
+    Route::get('login','login')->name('login');
+    Route::post('login_submit','login_submit')->name('login_submit');
+
+    Route::group(['middleware'=>'admin'],function(){
+        Route::get('logout','logout')->name('logout');
+        Route::get('dashboard','dashboard')->name('dashboard');
+
+        // Route::get('/profile', 'profile')->name('profile');
+
+        // Route::get('/change_password', 'change_password')->name('change_password');
+        // Route::put('/change_password_submit', 'change_password_submit')->name('change_password_submit');
+
+        // Route::get('/attendance', 'attendance')->name('attendance');
+        // Route::post('/attendance_leave_submit', 'attendance_leave_submit')->name('attendance_leave_submit');
+
+        // Route::get('/apply_leave', 'apply_leave')->name('apply_leave');
+        // Route::post('/apply_leave_submit', 'apply_leave_submit')->name('apply_leave_submit');
         
 
     });

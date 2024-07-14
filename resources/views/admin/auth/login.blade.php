@@ -1,4 +1,4 @@
-@extends('employee.auth.layout.app')
+@extends('admin.auth.layout.app')
 
 @push('css')
     
@@ -31,13 +31,13 @@
                                     </a>
                                 </div>
                                 <div class="ms-auto text-end">
-                                    <h4 class="font-size-18">Employee Login</h4>
+                                    <h4 class="font-size-18">Admin Login</h4>
                                     {{-- <p class="text-muted mb-0">Sign in to continue to Foxia.</p> --}}
                                 </div>
                             </div>
                             <div class="p-3">
 
-                                <form class="form-horizontal" action="{{ route('employee.login_submit') }}" method="post">
+                                <form class="form-horizontal" action="{{ route('admin.login_submit') }}" method="post">
                                     @csrf
 
                                     <div class="mb-3">

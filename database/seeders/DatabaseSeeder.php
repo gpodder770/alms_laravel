@@ -29,5 +29,18 @@ class DatabaseSeeder extends Seeder
         //     'personal_phone' => 'sss',
         //     'personal_email' => 'sss',
         // ]);
+
+        // To Create Admin
+        // \App\Models\Admin::create([
+        //     'company_location' => 0,
+        //     'first_name' => 'Sanjay',
+        //     'last_name' => 'Boss',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => Hash::make('admin12345'),
+        //     'personal_phone' => 12345,
+        //     'personal_email' => 'sss',
+        //     'address' => 'sss',
+        //     'profile_pic' => 'sss',
+        // ]);
     }
 }
