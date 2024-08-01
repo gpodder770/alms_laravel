@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Upcoming Holiday</h4>
                         <div class="table-responsive mt-4">
-                            <table class="table table-hover mb-0">
+                            <table class="table table-hover mb-0 table-bordered">
                                 <thead>
                                     <tr>
                                         {{-- <th scope="col">(#) Id</th> --}}
@@ -55,7 +55,7 @@
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Attendance</h4>
                         <div class="table-responsive mt-4">
-                            <table class="table table-hover mb-0">
+                            <table class="table table-hover mb-0 table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">(#) Id</th>
@@ -84,7 +84,7 @@
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Leave Status</h4>
                         <div class="table-responsive mt-4">
-                            <table class="table table-hover mb-0">
+                            <table class="table table-hover mb-0 table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">Type</th>

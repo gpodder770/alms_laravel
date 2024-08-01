@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+// use Illuminate\Support\Facades\Session;
 use Hash;
 use Carbon\Carbon;
 use DB;
@@ -30,10 +30,11 @@ class AdminController extends Controller
         ]);
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            Auth::guard('employee')->logout();
             return redirect()->route('admin.dashboard');
         }else{
-            Session::flash('error-message','Invalid Email or Password');
-            return back();
+            // Session::flash('error-message','Invalid Email or Password');
+            return back()->with('error', "Invalid Email or Password");
         }
     }
 
@@ -45,7 +46,7 @@ class AdminController extends Controller
     public function dashboard()
     {
         $admin_name = Auth::guard('admin')->user()->first_name ." ". Auth::guard('admin')->user()->last_name;
-        $employees = Employee::select('employee_id','first_name','last_name','email','profile_pic')->get();
+        $employees = Employee::select('employee_id','first_name','last_name','email','profile_pic','status')->get();
         $employees_array_size = $employees->count();
         return view('admin.dashboard',compact('admin_name','employees','employees_array_size'));
     }

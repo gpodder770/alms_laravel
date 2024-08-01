@@ -26,6 +26,7 @@ class Employee extends Authenticatable
         'department',
         'degree',
         'profile_pic',
+        'status',
     ];
 
     protected $hidden = [

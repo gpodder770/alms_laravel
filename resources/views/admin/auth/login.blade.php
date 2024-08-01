@@ -20,7 +20,11 @@
                 <div class="col-md-8 col-lg-5 col-xl-4">
                     <div class="card">
                         <div class="card-body">
-
+                            @if ($message = Session::get('error'))
+                            <div class="alert alert-danger">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @endif
                             <div class="d-flex p-3">
                                 <div>
                                     <a href="index.html" class="">
@@ -36,22 +40,18 @@
                                 </div>
                             </div>
                             <div class="p-3">
-
                                 <form class="form-horizontal" action="{{ route('admin.login_submit') }}" method="post">
                                     @csrf
-
                                     <div class="mb-3">
                                         <label class="form-label" for="username">Email</label>
                                         <input type="text" class="form-control" id="username" name="email"
                                             placeholder="Enter username">
                                     </div>
-
                                     <div class="mb-3">
                                         <label class="form-label" for="userpassword">Password</label>
                                         <input type="password" class="form-control" id="userpassword" name="password"
                                             placeholder="Enter password">
                                     </div>
-
                                     <div class="row mt-4">
                                         {{-- <div class="col-sm-6">
                                             <div class="form-check">
@@ -63,11 +63,9 @@
                                             </div>
                                         </div> --}}
                                         <div class="col-sm-6 text-end">
-                                            <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Log
-                                                In</button>
+                                            <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Login</button>
                                         </div>
                                     </div>
-
                                     <div class="mb-0 row">
                                         <div class="col-12 mt-4 text-center">
                                             <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock"></i>
@@ -75,9 +73,7 @@
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
-
                         </div>
                     </div>
                     <div class="mt-5 text-center position-relative">
@@ -89,7 +85,6 @@
                             Themesbrand
                         </p>
                     </div>
-
                 </div>
             </div>
         </div>

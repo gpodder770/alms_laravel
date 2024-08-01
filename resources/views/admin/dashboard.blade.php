@@ -1,19 +1,23 @@
 @extends('admin.layout.app')
 
+@push('css')
+
+@endpush
+
 @section('title')
     <title>Admin | Dashboard</title>
 @endsection
 
 @section('body')
     <div class="container-fluid">
-        <h1 class="dashboard_name_heading">Welcome, <span>{{$admin_name}}</span></h1>
+        <h1 class="dashboard_name_heading">Welcome, <span>{{ $admin_name }}</span></h1>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Employees</h4>
                         <div class="table-responsive mt-4">
-                            <table class="table table-hover mb-0">
+                            <table class="table table-hover mb-0 table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">SL</th>
@@ -34,14 +38,30 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $each_employee->employee_id }}</td>
-                                                <td>{{ $each_employee->first_name ." ". $each_employee->last_name }}</td>
+                                                <td>{{ $each_employee->first_name . ' ' . $each_employee->last_name }}</td>
                                                 <td>{{ $each_employee->email }}</td>
                                                 <td>{{ $each_employee->profile_pic }}</td>
+                                                <td>
+                                                    @if ($each_employee->status == 1)
+                                                        <a href="#" class="btn btn-outline-secondary btn-sm"
+                                                            title="Edit">
+                                                            <i class="fas fa-pencil-alt" title="Edit"></i>
+                                                        </a>
+                                                        <a class="btn btn-outline-secondary btn-sm" title="Delete">
+                                                            <i class="fas fa-trash-alt" title="Delete"></i>
+                                                        </a>
+                                                    @else
+                                                        <a class="btn btn-outline-danger btn-sm" title="Deactivated">
+                                                            Deactivated
+                                                        </a>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
@@ -49,3 +69,7 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    
+@endpush

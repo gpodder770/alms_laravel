@@ -96,7 +96,7 @@
 
                         <h4 class="card-title">Attendance Applied</h4>
 
-                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
+                        <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap"
                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>

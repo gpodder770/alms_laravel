@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+// use Illuminate\Support\Facades\Session;
 use Hash;
 use Carbon\Carbon;
 use DB;
@@ -37,11 +37,12 @@ class EmployeeController extends Controller
             'password'=>'required',
         ]);
 
-        if (Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::guard('employee')->attempt(['email' => $request->email, 'password' => $request->password, 'status'=> 1])) {
+            Auth::guard('admin')->logout();
             return redirect()->route('employee.dashboard');
         }else{
-            Session::flash('error-message','Invalid Email or Password');
-            return back();
+            // Session::flash('error-message','Invalid Email or Password');
+            return back()->with('error', "Invalid Email or Password");
         }
     }
 

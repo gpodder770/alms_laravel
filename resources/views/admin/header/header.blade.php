@@ -5,7 +5,7 @@
             <div class="navbar-brand-box d-block d-lg-none">
                 <a href="index.html" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="assets/images/logo-sm.png" alt="" height="22">
+                        <img src="{{ asset('vendor/foxia/images/logo-sm.png')}}" alt="" height="22">
                     </span>
                 </a>
             </div>
@@ -28,7 +28,7 @@
         <div class="d-flex">
             <div class="dropdown d-inline-block ms-2">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-6.jpg" alt="Header Avatar">
+                    <img class="rounded-circle header-profile-user" src="{{ asset('vendor/foxia/images/users/avatar-6.jpg')}}" alt="Header Avatar">
                     <span class="d-none d-md-inline-block ms-1">{{ Auth::guard('admin')->user()->first_name." ".Auth::guard('admin')->user()->last_name }}<i class="mdi mdi-chevron-down"></i> </span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
@@ -56,10 +56,10 @@
                 <div class="navbar-brand-box d-none d-lg-block">
                     <a href="index.html" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="assets/images/logo-sm.png" alt="" height="22">
+                            <img src="{{ asset('vendor/foxia/images/logo-sm.png')}}" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets/images/logo.png" alt="" height="20">
+                            <img src="{{ asset('vendor/foxia/images/logo.png')}}" alt="" height="20">
                         </span>
                     </a>
                 </div>
