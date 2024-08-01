@@ -1,7 +1,11 @@
 @extends('admin.layout.app')
 
 @push('css')
-
+<style>
+    .delete_btn {
+  display: inline;
+}
+</style>
 @endpush
 
 @section('title')
@@ -16,6 +20,16 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Employees</h4>
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @endif
+                        @if ($message = Session::get('error'))
+                            <div class="alert alert-danger">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @endif
                         <div class="table-responsive mt-4">
                             <table class="table table-hover mb-0 table-bordered">
                                 <thead>
@@ -47,13 +61,23 @@
                                                             title="Edit">
                                                             <i class="fas fa-pencil-alt" title="Edit"></i>
                                                         </a>
-                                                        <a class="btn btn-outline-secondary btn-sm" title="Delete">
+                                                        {{-- <a class="btn btn-outline-secondary btn-sm" title="Delete">
                                                             <i class="fas fa-trash-alt" title="Delete"></i>
-                                                        </a>
+                                                        </a> --}}
+                                                        <form class="delete_btn" action="{{ route('admin.delete_employee',$each_employee->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-outline-secondary btn-sm" title="Delete" type="submit" onclick="return confirm('Are you sure? This will remove EVERY information of this user.')"><i class="fas fa-trash-alt"></i></button>
+                                                        </form>
                                                     @else
                                                         <a class="btn btn-outline-danger btn-sm" title="Deactivated">
                                                             Deactivated
                                                         </a>
+                                                        <form class="delete_btn" action="{{ route('admin.delete_employee',$each_employee->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-outline-secondary btn-sm" title="Delete" type="submit" onclick="return confirm('Are you sure? This will remove EVERY information of this user.')"><i class="fas fa-trash-alt"></i></button>
+                                                        </form>
                                                     @endif
                                                 </td>
                                             </tr>

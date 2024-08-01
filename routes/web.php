@@ -54,6 +54,7 @@ Route::controller(AdminController::class)->prefix('admin')->as('admin.')->group(
         Route::get('logout','logout')->name('logout');
         Route::get('dashboard','dashboard')->name('dashboard');
 
+        Route::delete('delete_employee/{id}','delete_employee')->name('delete_employee');
         // Route::get('/profile', 'profile')->name('profile');
 
         // Route::get('/change_password', 'change_password')->name('change_password');

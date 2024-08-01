@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use DB;
 
 use App\Models\Employee;
+use App\Models\EmployeesLeave;
+use App\Models\Attendance;
 
 class AdminController extends Controller
 {
@@ -46,8 +48,23 @@ class AdminController extends Controller
     public function dashboard()
     {
         $admin_name = Auth::guard('admin')->user()->first_name ." ". Auth::guard('admin')->user()->last_name;
-        $employees = Employee::select('employee_id','first_name','last_name','email','profile_pic','status')->get();
+        $employees = Employee::select('id','employee_id','first_name','last_name','email','profile_pic','status')->get();
         $employees_array_size = $employees->count();
         return view('admin.dashboard',compact('admin_name','employees','employees_array_size'));
+    }
+
+    public function delete_employee($id){
+        $is_there = Employee::find($id);
+        if (is_null($is_there)) {
+            return back()->with('error', "Something Went Wrong");
+        }else{
+            $employee_name = $is_there->first_name . ' ' . $is_there->last_name;
+            $is_there->delete();
+            $attendance_info = Attendance::where('employee_id',$id)->delete();
+            $leave_info = EmployeesLeave::where('employee_id',$id)->delete();
+            // Session::flash('error-message','Invalid Email or Password');
+            return back()->with('success', "$employee_name Has Been Deleted Successfully");
+        }
+        dd($is_there);
     }
 }
