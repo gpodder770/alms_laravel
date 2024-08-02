@@ -82,7 +82,7 @@ class AdminController extends Controller
                 'address'=>$request->address,
             ];
             $is_there->update($data);
-            return redirect()->route('admin.dashboard')->with('success', "Employee Information Updated Successfully");;
+            return redirect()->route('admin.dashboard')->with('success', "Employee Information Updated Successfully");
         }
     }
 
@@ -99,5 +99,28 @@ class AdminController extends Controller
             return back()->with('success', "$employee_name Has Been Deleted Successfully");
         }
         // dd($is_there);
+    }
+
+    public function change_employee_password($id){
+        return view('admin.employee_change_password',compact('id'));
+    }
+
+    public function change_employee_password_submit(Request $request,$id){
+        if ($request->password != $request->confirm_password) {
+            return back()->with('error', "Something Went Wrong");
+        }else{
+            
+            $is_there = Employee::find($id);
+            if (is_null($is_there)) {
+                return back()->with('error', "Something Went Wrong");
+            }else{
+                $encrypt = Hash::make($request->password);
+                $is_there->update(['password'=>$encrypt]);
+                return redirect()->route('admin.dashboard')->with('success', "Employee Information Updated Successfully");
+            }
+            // dd($encrypt);
+        }
+        // dd($is_there);
+        // dd($request);
     }
 }

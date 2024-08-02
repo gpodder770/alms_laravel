@@ -69,6 +69,7 @@
                                                             @method('DELETE')
                                                             <button class="btn btn-outline-secondary btn-sm" title="Delete" type="submit" onclick="return confirm('Are you sure? This will remove EVERY information of this user.')"><i class="fas fa-trash-alt"></i></button>
                                                         </form>
+                                                        <a href="{{ route('admin.change_employee_password',$each_employee->id) }}" class="btn btn-outline-secondary btn-sm" title="Change Password"><i class="fas fa-key"></i></a>
                                                     @else
                                                         <a class="btn btn-outline-danger btn-sm" title="Deactivated">
                                                             Deactivated

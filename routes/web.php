@@ -57,6 +57,8 @@ Route::controller(AdminController::class)->prefix('admin')->as('admin.')->group(
         Route::get('edit_employee/{id}','edit_employee')->name('edit_employee');
         Route::post('edit_employee_submit/{id}','edit_employee_submit')->name('edit_employee_submit');
         Route::delete('delete_employee/{id}','delete_employee')->name('delete_employee');
+        Route::get('change_employee_password/{id}','change_employee_password')->name('change_employee_password');
+        Route::put('change_employee_password_submit/{id}','change_employee_password_submit')->name('change_employee_password_submit');
         // Route::get('/profile', 'profile')->name('profile');
 
         // Route::get('/change_password', 'change_password')->name('change_password');
