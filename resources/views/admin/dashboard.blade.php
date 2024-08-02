@@ -57,7 +57,7 @@
                                                 <td>{{ $each_employee->profile_pic }}</td>
                                                 <td>
                                                     @if ($each_employee->status == 1)
-                                                        <a href="#" class="btn btn-outline-secondary btn-sm"
+                                                        <a href="{{ route('admin.edit_employee',$each_employee->id) }}" class="btn btn-outline-secondary btn-sm"
                                                             title="Edit">
                                                             <i class="fas fa-pencil-alt" title="Edit"></i>
                                                         </a>

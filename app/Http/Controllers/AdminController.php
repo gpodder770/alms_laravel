@@ -53,6 +53,39 @@ class AdminController extends Controller
         return view('admin.dashboard',compact('admin_name','employees','employees_array_size'));
     }
 
+    public function edit_employee($id){
+        // dd($id);
+        $is_there = Employee::find($id);
+        if (is_null($is_there)) {
+            return back()->with('error', "Something Went Wrong");
+        }else{
+            // return back()->with('success', "$employee_name Has Been Deleted Successfully");
+            return view('admin.employee_profile',compact('is_there'));
+        }
+    }
+
+    public function edit_employee_submit(Request $request,$id){
+        $is_there = Employee::find($id);
+        if (is_null($is_there)) {
+            return back()->with('error', "Something Went Wrong");
+        }else{
+            $data = [
+                'first_name'=>$request->first_name,
+                'last_name'=>$request->last_name,
+                'personal_email'=>$request->personal_email,
+                'birthday'=>$request->birthday,
+                'gender'=>$request->gender,
+                'personal_phone'=>$request->personal_phone,
+                'nid'=>$request->nid,
+                'department'=>$request->department,
+                'degree'=>$request->degree,
+                'address'=>$request->address,
+            ];
+            $is_there->update($data);
+            return redirect()->route('admin.dashboard')->with('success', "Employee Information Updated Successfully");;
+        }
+    }
+
     public function delete_employee($id){
         $is_there = Employee::find($id);
         if (is_null($is_there)) {
@@ -65,6 +98,6 @@ class AdminController extends Controller
             // Session::flash('error-message','Invalid Email or Password');
             return back()->with('success', "$employee_name Has Been Deleted Successfully");
         }
-        dd($is_there);
+        // dd($is_there);
     }
 }
