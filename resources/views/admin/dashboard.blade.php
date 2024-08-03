@@ -1,11 +1,15 @@
 @extends('admin.layout.app')
 
 @push('css')
-<style>
-    .delete_btn {
-  display: inline;
-}
-</style>
+    <style>
+        .delete_btn {
+            display: inline;
+        }
+
+        .badge {
+            font-size: 16px;
+        }
+    </style>
 @endpush
 
 @section('title')
@@ -57,28 +61,41 @@
                                                 <td>{{ $each_employee->profile_pic }}</td>
                                                 <td>
                                                     @if ($each_employee->status == 1)
-                                                        <a href="{{ route('admin.edit_employee',$each_employee->id) }}" class="btn btn-outline-secondary btn-sm"
-                                                            title="Edit">
+                                                        <a href="{{ route('admin.edit_employee', $each_employee->id) }}"
+                                                            class="btn btn-outline-secondary btn-sm" title="Edit">
                                                             <i class="fas fa-pencil-alt" title="Edit"></i>
                                                         </a>
-                                                        {{-- <a class="btn btn-outline-secondary btn-sm" title="Delete">
-                                                            <i class="fas fa-trash-alt" title="Delete"></i>
-                                                        </a> --}}
-                                                        <form class="delete_btn" action="{{ route('admin.delete_employee',$each_employee->id) }}" method="POST">
+                                                        <form class="delete_btn"
+                                                            action="{{ route('admin.delete_employee', $each_employee->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-outline-secondary btn-sm" title="Delete" type="submit" onclick="return confirm('Are you sure? This will remove EVERY information of this user.')"><i class="fas fa-trash-alt"></i></button>
+                                                            <button class="btn btn-outline-secondary btn-sm" title="Delete"
+                                                                type="submit"
+                                                                onclick="return confirm('Are you sure? This will remove EVERY information of this user.')"><i
+                                                                    class="fas fa-trash-alt"></i></button>
                                                         </form>
-                                                        <a href="{{ route('admin.change_employee_password',$each_employee->id) }}" class="btn btn-outline-secondary btn-sm" title="Change Password"><i class="fas fa-key"></i></a>
+                                                        <a href="{{ route('admin.change_employee_password', $each_employee->id) }}"
+                                                            class="btn btn-outline-secondary btn-sm"
+                                                            title="Change Password"><i class="fas fa-key"></i></a>
+                                                        <a href="{{ route('admin.change_employee_status', $each_employee->id) }}"
+                                                            class="btn btn-outline-secondary btn-sm"
+                                                            title="Deactivate User"><i class="fas fa-toggle-off"></i></a>
                                                     @else
-                                                        <a class="btn btn-outline-danger btn-sm" title="Deactivated">
-                                                            Deactivated
-                                                        </a>
-                                                        <form class="delete_btn" action="{{ route('admin.delete_employee',$each_employee->id) }}" method="POST">
+                                                        <span class="badge bg-danger">DEACTIVATED</span>
+                                                        <form class="delete_btn"
+                                                            action="{{ route('admin.delete_employee', $each_employee->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-outline-secondary btn-sm" title="Delete" type="submit" onclick="return confirm('Are you sure? This will remove EVERY information of this user.')"><i class="fas fa-trash-alt"></i></button>
+                                                            <button class="btn btn-outline-secondary btn-sm" title="Delete"
+                                                                type="submit"
+                                                                onclick="return confirm('Are you sure? This will remove EVERY information of this user.')"><i
+                                                                    class="fas fa-trash-alt"></i></button>
                                                         </form>
+                                                        <a href="{{ route('admin.change_employee_status', $each_employee->id) }}"
+                                                            class="btn btn-outline-secondary btn-sm"
+                                                            title="Activate User"><i class="fas fa-toggle-on"></i></a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -94,7 +111,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    
-@endpush

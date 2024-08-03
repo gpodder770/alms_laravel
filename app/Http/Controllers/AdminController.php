@@ -112,4 +112,19 @@ class AdminController extends Controller
             return redirect()->route('admin.dashboard')->with('success', "Employee Information Updated Successfully");
         }
     }
+
+    public function change_employee_status($id){
+        $is_there = Employee::find($id);
+        if (is_null($is_there)) {
+            return back()->with('error', "Something Went Wrong");
+        }else{
+            if($is_there->status == 0){
+                $is_there->update(['status'=> 1]);
+                return back()->with('success', "Employee Activated Successfully");
+            }else{
+                $is_there->update(['status'=> 0]);
+                return back()->with('error', "Employee Deactivated Successfully");
+            }
+        }
+    }
 }
