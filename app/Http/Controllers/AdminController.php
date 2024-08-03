@@ -25,7 +25,6 @@ class AdminController extends Controller
     }
 
     public function login_submit(Request $request){
-        // dd($request);
         $request->validate([
             'email'=>'required',
             'password'=>'required',
@@ -35,7 +34,6 @@ class AdminController extends Controller
             Auth::guard('employee')->logout();
             return redirect()->route('admin.dashboard');
         }else{
-            // Session::flash('error-message','Invalid Email or Password');
             return back()->with('error', "Invalid Email or Password");
         }
     }
@@ -54,12 +52,10 @@ class AdminController extends Controller
     }
 
     public function edit_employee($id){
-        // dd($id);
         $is_there = Employee::find($id);
         if (is_null($is_there)) {
             return back()->with('error', "Something Went Wrong");
         }else{
-            // return back()->with('success', "$employee_name Has Been Deleted Successfully");
             return view('admin.employee_profile',compact('is_there'));
         }
     }
@@ -95,10 +91,8 @@ class AdminController extends Controller
             $is_there->delete();
             $attendance_info = Attendance::where('employee_id',$id)->delete();
             $leave_info = EmployeesLeave::where('employee_id',$id)->delete();
-            // Session::flash('error-message','Invalid Email or Password');
             return back()->with('success', "$employee_name Has Been Deleted Successfully");
         }
-        // dd($is_there);
     }
 
     public function change_employee_password($id){
@@ -109,22 +103,13 @@ class AdminController extends Controller
         $request->validate([
             'password' => 'required|confirmed|min:6',
         ]);
-        dd($request);
-        if ($request->password != $request->confirm_password) {
+        $is_there = Employee::find($id);
+        if (is_null($is_there)) {
             return back()->with('error', "Something Went Wrong");
         }else{
-            
-            $is_there = Employee::find($id);
-            if (is_null($is_there)) {
-                return back()->with('error', "Something Went Wrong");
-            }else{
-                $encrypt = Hash::make($request->password);
-                $is_there->update(['password'=>$encrypt]);
-                return redirect()->route('admin.dashboard')->with('success', "Employee Information Updated Successfully");
-            }
-            // dd($encrypt);
+            $encrypt = Hash::make($request->password);
+            $is_there->update(['password'=>$encrypt]);
+            return redirect()->route('admin.dashboard')->with('success', "Employee Information Updated Successfully");
         }
-        // dd($is_there);
-        // dd($request);
     }
 }
