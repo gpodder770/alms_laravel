@@ -106,6 +106,10 @@ class AdminController extends Controller
     }
 
     public function change_employee_password_submit(Request $request,$id){
+        $request->validate([
+            'password' => 'required|confirmed|min:6',
+        ]);
+        dd($request);
         if ($request->password != $request->confirm_password) {
             return back()->with('error', "Something Went Wrong");
         }else{

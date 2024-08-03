@@ -5,3 +5,8 @@
 .alert-danger,.alert-success{
     margin-bottom: 30px;
 }
+.table thead th {
+    background: var(--bs-bg-gradient);
+    color: white;
+    font-weight: 700;
+}

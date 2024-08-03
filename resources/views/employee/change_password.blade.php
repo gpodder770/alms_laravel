@@ -45,19 +45,24 @@
                                     <label for="validationPassword" class="form-label">New Password</label>
                                     <input type="password" class="form-control" name="password" id="validationPassword"
                                         placeholder="Please Enter Password" onkeyup="validateNewPassword()" required>
-                                    @error('password')
+                                    {{-- @error('password')
                                         <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                                 <div class="col-md-6">
                                     <label for="validationConfirmPassword" class="form-label">Confirm New Password</label>
-                                    <input type="password" class="form-control" name="confirm_password"
+                                    <input type="password" class="form-control" name="password_confirmation"
                                         id="validationConfirmPassword" placeholder="Please Enter Password Again"
                                         onkeyup="validateNewPassword()" required>
-                                    @error('confirm_password')
+                                    {{-- @error('password_confirmation')
                                         <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
+                                @error('password')
+                                    <div class="col-md-12 mt-3 mb-0">
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    </div>
+                                @enderror
                                 <div class="col-md-12">
                                     <div class="mt-3 mb-0 d-none alert alert-success" id="pass_match">
                                         <strong>Passwords Match</strong>

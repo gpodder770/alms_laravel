@@ -4,6 +4,15 @@
     <title>Admin | Change Employee Password</title>
 @endsection
 
+@push('css')
+    <style>
+        .alert-danger,
+        .alert-success {
+            margin-bottom: 0px;
+        }
+    </style>
+@endpush
+
 @section('body')
     <div class="container">
         <div class="row d-flex justify-content-center">
@@ -21,7 +30,7 @@
                                 <strong>{{ $message }}</strong>
                             </div>
                         @endif
-                        <form action="{{ route('admin.change_employee_password_submit',$id) }}" method="post">
+                        <form action="{{ route('admin.change_employee_password_submit', $id) }}" method="post">
                             @method('put')
                             @csrf
                             <div class="mb-3 row">
@@ -29,19 +38,24 @@
                                     <label for="validationPassword" class="form-label">New Password</label>
                                     <input type="password" class="form-control" name="password" id="validationPassword"
                                         placeholder="Please Enter Password" onkeyup="validateNewPassword()" required>
-                                    @error('password')
+                                    {{-- @error('password')
                                         <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
                                 <div class="col-md-6">
                                     <label for="validationConfirmPassword" class="form-label">Confirm New Password</label>
-                                    <input type="password" class="form-control" name="confirm_password"
+                                    <input type="password" class="form-control" name="password_confirmation"
                                         id="validationConfirmPassword" placeholder="Please Enter Password Again"
                                         onkeyup="validateNewPassword()" required>
-                                    @error('confirm_password')
+                                    {{-- @error('password_confirmation')
                                         <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    @enderror --}}
                                 </div>
+                                @error('password')
+                                    <div class="col-md-12 mt-3 mb-0">
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    </div>
+                                @enderror
                                 <div class="col-md-12">
                                     <div class="mt-3 mb-0 d-none alert alert-success" id="pass_match">
                                         <strong>Passwords Match</strong>
@@ -50,9 +64,7 @@
                                         <strong>Passwords Does Not Match</strong>
                                     </div>
                                 </div>
-
                             </div>
-
                             <div class="mt-0 col-md-12">
                                 <button class="btn btn-primary" id="submit_button" type="submit" disabled>Submit</button>
                             </div>
@@ -62,12 +74,10 @@
             </div> <!-- end col -->
         </div>
         <!-- end row -->
-
     </div>
 @endsection
 
 @push('script')
-
     <script>
         function validateNewPassword() {
             // Get form fields
@@ -78,7 +88,7 @@
             const pass_match = $('#pass_match');
             const pass_not_match = $('#pass_not_match');
 
-             if (new_pass == confirm_pass && new_pass.length != 0 && confirm_pass.length != 0) {
+            if (new_pass == confirm_pass && new_pass.length != 0 && confirm_pass.length != 0) {
                 // current_password_missing.removeClass('d-block');
                 // current_password_missing.addClass('d-none');
                 pass_match.removeClass('d-none');

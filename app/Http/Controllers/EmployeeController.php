@@ -76,8 +76,7 @@ class EmployeeController extends Controller
         // dd($request);
         $request->validate([
             'current_password' =>'required',
-            'password' =>'required',
-            'confirm_password' =>'required',
+            'password' =>'required|confirmed|min:6',
         ]);
         
         if($request->password != $request->confirm_password){

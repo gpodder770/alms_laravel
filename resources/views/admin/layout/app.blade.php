@@ -22,13 +22,6 @@
     <link href="{{ asset('css/custom.css') }} " rel="stylesheet" type="text/css">
     @stack('css')
 
-    <style>
-        .table thead th {
-            background: var(--bs-bg-gradient);
-            color: white;
-            font-weight: 700;
-        }
-    </style>
 </head>
 
 <body data-topbar="colored" data-layout="horizontal">
