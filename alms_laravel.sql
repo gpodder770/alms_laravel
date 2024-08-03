@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Jul 08, 2024 at 10:42 AM
+-- Generation Time: Aug 03, 2024 at 06:14 AM
 -- Server version: 11.3.2-MariaDB
 -- PHP Version: 8.2.18
 
@@ -24,6 +24,37 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admins`
+--
+
+DROP TABLE IF EXISTS `admins`;
+CREATE TABLE IF NOT EXISTS `admins` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `company_location` int(11) NOT NULL COMMENT '0 = Bangladesh,\r\n1 = India',
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `personal_phone` varchar(255) NOT NULL,
+  `personal_email` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `profile_pic` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `employees_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `company_location`, `first_name`, `last_name`, `email`, `password`, `personal_phone`, `personal_email`, `address`, `profile_pic`, `created_at`, `updated_at`) VALUES
+(1, 0, 'Sanjay', 'Boss', 'admin@gmail.com', '$2y$12$o7o4diCtcBKv51yAniaVKeztPwJ62VkGx8NZn0/LSstcOW85JwC1G', '12345', 'sss', 'sss', 'sss', '2024-07-14 04:57:43', '2024-07-14 04:57:43');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `attendance`
 --
 
@@ -39,13 +70,6 @@ CREATE TABLE IF NOT EXISTS `attendance` (
   `updated_at` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `attendance`
---
-
-INSERT INTO `attendance` (`id`, `employee_id`, `attendace_date`, `start_time`, `end_time`, `reason`, `created_at`, `updated_at`) VALUES
-(1, 2, '2024-07-08', '12:00', '15:00', 'sdfsfsdf', '2024-07-08 10:31:10', '2024-07-08 10:31:10');
 
 -- --------------------------------------------------------
 
@@ -71,19 +95,21 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `department` varchar(255) NOT NULL,
   `degree` varchar(255) NOT NULL,
   `profile_pic` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '0 = Deactivated, 1 = Activated',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `employees_employee_id_unique` (`employee_id`),
   UNIQUE KEY `employees_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `employee_id`, `company_location`, `first_name`, `last_name`, `email`, `password`, `birthday`, `gender`, `personal_phone`, `personal_email`, `nid`, `address`, `department`, `degree`, `profile_pic`, `created_at`, `updated_at`) VALUES
-(2, '11-001019', 0, 'Gourab', 'Podder', 'aa@gmail.com', '$2y$12$UUa5OHRTTHKDRSn.QHWC1OOpDrk31/JC0YPq/JjUj5Vz.MmoG4MUK', '1996-11-11', 0, '2432423423', 'aa@gmail.com', '5464543456', 'Shantinagar', 'IT', 'Bsc in CSE', '', '2024-02-26 10:08:13', '2024-04-05 13:11:46');
+INSERT INTO `employees` (`id`, `employee_id`, `company_location`, `first_name`, `last_name`, `email`, `password`, `birthday`, `gender`, `personal_phone`, `personal_email`, `nid`, `address`, `department`, `degree`, `profile_pic`, `status`, `created_at`, `updated_at`) VALUES
+(1, '11-001019', 0, 'Gourab', 'Podder', 'aa@gmail.com', '$2y$12$tv3zlqjQVpd1tPGYZzSh4.PtXclHZ9HhJb/c5EDC1uj3uxVVSgGdG', '1996-11-11', 0, '2432423423', 'aa@gmail.com', '5464543456', 'Shantinagar', 'IT', 'Bsc in CSE', 'sss', 1, '2024-02-26 16:08:13', '2024-08-03 10:58:30'),
+(2, '11-001012', 0, 'Gourab', 'Podder', 'asa@gmail.com', '$2y$12$UUa5OHRTTHKDRSn.QHWC1OOpDrk31/JC0YPq/JjUj5Vz.MmoG4MUK', '1996-11-11', 0, '2432423423', 'asa@gmail.com', '5464543456', 'Shantinagar', 'IT', 'Bsc in CSE', 'sss', 1, '2024-02-26 16:08:13', '2024-08-03 10:55:13');
 
 -- --------------------------------------------------------
 
@@ -106,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `employee_leave` (
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `e_id` (`employee_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
