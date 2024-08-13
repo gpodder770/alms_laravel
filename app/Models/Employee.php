@@ -11,7 +11,7 @@ class Employee extends Authenticatable
     use HasFactory;
 
     protected $fillable = [
-        'employee_id ',
+        'employee_id',
         'company_location',
         'first_name',
         'last_name',

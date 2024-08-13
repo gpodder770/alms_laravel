@@ -60,17 +60,9 @@ Route::controller(AdminController::class)->prefix('admin')->as('admin.')->group(
         Route::get('change_employee_password/{id}','change_employee_password')->name('change_employee_password');
         Route::put('change_employee_password_submit/{id}','change_employee_password_submit')->name('change_employee_password_submit');
         Route::get('change_employee_status/{id}','change_employee_status')->name('change_employee_status');
-        // Route::get('/profile', 'profile')->name('profile');
-
-        // Route::get('/change_password', 'change_password')->name('change_password');
-        // Route::put('/change_password_submit', 'change_password_submit')->name('change_password_submit');
-
-        // Route::get('/attendance', 'attendance')->name('attendance');
-        // Route::post('/attendance_leave_submit', 'attendance_leave_submit')->name('attendance_leave_submit');
-
-        // Route::get('/apply_leave', 'apply_leave')->name('apply_leave');
-        // Route::post('/apply_leave_submit', 'apply_leave_submit')->name('apply_leave_submit');
         
+        Route::get('new_employee','new_employee')->name('new_employee');
+        Route::post('new_employee_submit','new_employee_submit')->name('new_employee_submit');
 
     });
 

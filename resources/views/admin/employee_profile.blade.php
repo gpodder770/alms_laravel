@@ -19,6 +19,20 @@
                             @csrf
                             <div class="mb-3 row">
                                 <div class="col-md-4">
+                                    <label for="validationCompanyLocation" class="form-label">Company Location</label>
+                                    <select class="form-select" name="company_location" id="validationCompanyLocation" aria-label="Default select example">
+                                        <option value="0" {{ $is_there->company_location == 0 ? 'selected="selected"' : '' }}>
+                                            Bangladesh</option>
+                                        <option value="1" {{ $is_there->company_location == 1 ? 'selected="selected"' : '' }}>
+                                            India</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a company location.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-md-4">
                                     <label for="validationFirstName" class="form-label">First name</label>
                                     <input type="text" class="form-control" name="first_name" id="validationFirstName"
                                         value="{{ $is_there->first_name }}">
@@ -60,8 +74,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="validationGender" class="form-label">Gender</label>
-                                    {{-- <input type="text" class="form-control" id="validationGender" name="gender" value="{{ $is_there->gender == 0 ? 'Male' : 'Female' }}"> --}}
-                                    <select class="form-select" name="gender" aria-label="Default select example">
+                                    <select class="form-select" name="gender" id="validationGender"  aria-label="Default select example">
                                         <option value="0" {{ $is_there->gender == 0 ? 'selected="selected"' : '' }}>
                                             Male</option>
                                         <option value="1" {{ $is_there->gender == 1 ? 'selected="selected"' : '' }}>
@@ -106,7 +119,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="mb-3 row">
                                 <div class="col-md-12">
                                     <label class="form-label">Address</label>
                                     <textarea id="textarea" class="form-control" name="address" maxlength="225" rows="3">{{ $is_there->address }}</textarea>

@@ -83,6 +83,7 @@
     <script src="{{ asset('vendor/foxia/js/pages/dashboard.init.js') }} "></script>
 
     <script src="{{ asset('vendor/foxia/js/app.js') }} "></script>
+    <script src="{{ asset('js/custom.js') }} "></script>
 
     @stack('script')
 

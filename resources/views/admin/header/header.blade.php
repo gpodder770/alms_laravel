@@ -73,11 +73,11 @@
                                     <i class="dripicons-meter me-2"></i>Dashboard
                                 </a>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a class="nav-link" href="{{route('employee.attendance')}}">
-                                    <i class="dripicons-meter me-2"></i>Attendance
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.new_employee') }}">
+                                    <i class="dripicons-plus me-2"></i>New Employee
                                 </a>
-                            </li> --}}
+                            </li>
                             {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{route('employee.apply_leave')}}">
                                     <i class="dripicons-meter me-2"></i>Apply Leave

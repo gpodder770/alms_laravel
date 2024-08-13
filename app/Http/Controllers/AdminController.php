@@ -66,6 +66,7 @@ class AdminController extends Controller
             return back()->with('error', "Something Went Wrong");
         }else{
             $data = [
+                'company_location'=>$request->company_location,
                 'first_name'=>$request->first_name,
                 'last_name'=>$request->last_name,
                 'personal_email'=>$request->personal_email,
@@ -126,5 +127,56 @@ class AdminController extends Controller
                 return back()->with('error', "Employee Deactivated Successfully");
             }
         }
+    }
+
+    public function new_employee(){
+        return view('admin.new_employee');
+    }
+
+    public function new_employee_submit(Request $request){
+        // dd($request);
+
+        $request->validate([
+            'company_location'=>'required',
+            'employee_id'=>'required',
+            'email'=>'required|email',
+            'first_name'=>'required',
+            'last_name'=>'required',
+            'personal_email'=>'required|email',
+            'birthday'=>'required',
+            'gender'=>'required',
+            'personal_phone'=>'required',
+            'department'=>'required',
+            'degree'=>'required',
+            'address'=>'required',
+            'profile_pic'=>'required|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        // dd($request);
+        $data = [
+            'company_location'=>$request->company_location,
+            'employee_id'=>$request->employee_id,
+            'email'=>$request->email,
+            'first_name'=>$request->first_name,
+            'last_name'=>$request->last_name,
+            'personal_email'=>$request->personal_email,
+            'password'=>Hash::make('admin12345'),
+            'birthday'=>$request->birthday,
+            'gender'=>$request->gender,
+            'personal_phone'=>$request->personal_phone,
+            'nid'=>$request->nid,
+            'department'=>$request->department,
+            'degree'=>$request->degree,
+            'address'=>$request->address,
+            'profile_pic'=>$request->profile_pic,
+        ];
+        // dd($data);
+
+        $profile_pic_name = $request->first_name."".$request->last_name."_".date('YmdHis').".".$request->profile_pic->getClientOriginalExtension();
+        $request->profile_pic->move(public_path('upload/employee_images'),$profile_pic_name);
+        $data['profile_pic'] = $profile_pic_name;
+
+        Employee::create($data);
+        return back()->with('success', "Employee Created Successfully");
+
     }
 }
