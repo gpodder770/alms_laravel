@@ -6,6 +6,21 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}">
+
+    <style>
+        
+        .card-body{
+            position: relative;
+        }
+        .profile_image_view{
+            position: absolute;
+            width: 180px;
+            border-radius: 50%;
+            right: 20px;
+            top: 20px;
+
+        }
+    </style>
 @endpush
 
 @section('body')
@@ -15,7 +30,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="mb-5 card-title">Employee Information</h4>
-                        <form action="{{ route('admin.edit_employee_submit', $is_there->id) }}" method="post">
+                        <form action="{{ route('admin.edit_employee_submit', $is_there->id) }}" method="post" enctype="multipart/form-data">
+                            @method('put')
                             @csrf
                             <div class="mb-3 row">
                                 <div class="col-md-4">
@@ -28,6 +44,26 @@
                                     </select>
                                     <div class="invalid-feedback">
                                         Please select a company location.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label for="validationEmployeeId" class="form-label">Employee ID</label>
+                                    <input type="text" class="form-control" name="employee_id" value="{{ $is_there->employee_id }}" id="validationEmployeeId" required>
+                                    @error('employee_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="validationEmail" class="form-label">Employee Company Email</label>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text" id="PersonalEmailGroupPrepend">@</span>
+                                        <input type="email" class="form-control" name="email" value="{{ $is_there->email }}"
+                                            id="validationEmail" aria-describedby="PersonalEmailGroupPrepend" required>
+                                        @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -125,6 +161,23 @@
                                     <textarea id="textarea" class="form-control" name="address" maxlength="225" rows="3">{{ $is_there->address }}</textarea>
                                     <div class="invalid-feedback">
                                         Please enter Address.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label for="employee_image" class="form-label">Image</label>
+                                    <div class="form-group">
+                                        @if($is_there->profile_pic)
+                                        <img src="{{ asset('upload/employee_images/'.$is_there->profile_pic) }}" class="profile_image_view" alt="Profile Picture">
+                                        @endif
+                                        <input type="file" class="form-control-file" name="profile_pic"
+                                            id="employee_image" onchange="image_verify(this)" required>
+                                        <p id="employee_image-result" class="alert alert-danger d-none my-2"></p>
+                                        <p class="help-block text-red">Only jpg/png are allowed.</p>
+                                        @error('profile_pic')
+                                            <div class="alert alert-danger mt-2"><strong>{{ $message }}</strong></div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

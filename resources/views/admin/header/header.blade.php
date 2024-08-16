@@ -69,7 +69,7 @@
                     <div class="collapse navbar-collapse" id="topnav-menu-content">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('employee.dashboard')}}">
+                                <a class="nav-link" href="{{route('admin.dashboard')}}">
                                     <i class="dripicons-meter me-2"></i>Dashboard
                                 </a>
                             </li>

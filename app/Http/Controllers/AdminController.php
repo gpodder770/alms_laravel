@@ -78,6 +78,11 @@ class AdminController extends Controller
                 'degree'=>$request->degree,
                 'address'=>$request->address,
             ];
+
+            $profile_pic_name = $request->first_name."".$request->last_name."_".date('YmdHis').".".$request->profile_pic->getClientOriginalExtension();
+            $request->profile_pic->move(public_path('upload/employee_images'),$profile_pic_name);
+            $data['profile_pic'] = $profile_pic_name;
+
             $is_there->update($data);
             return redirect()->route('admin.dashboard')->with('success', "Employee Information Updated Successfully");
         }
