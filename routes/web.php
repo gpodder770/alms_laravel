@@ -64,6 +64,8 @@ Route::controller(AdminController::class)->prefix('admin')->as('admin.')->group(
         Route::get('new_employee','new_employee')->name('new_employee');
         Route::post('new_employee_submit','new_employee_submit')->name('new_employee_submit');
 
+        Route::get('employee_leave', 'employee_leave')->name('employee_leave');
+
     });
 
 });

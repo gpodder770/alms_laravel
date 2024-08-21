@@ -182,6 +182,14 @@ class AdminController extends Controller
 
         Employee::create($data);
         return back()->with('success', "Employee Created Successfully");
+    }
 
+    public function employee_leave(){
+        // $employees_leave_info = EmployeesLeave::whereYear('created_at', date('Y'))->get();
+        $employees_leave_info = DB::table('employee_leave')->leftjoin('employees','employee_leave.employee_id','=','employees.employee_id')->whereYear('employee_leave.created_at', date('Y'))->select('employees.employee_id','employee_leave.leave_type','employee_leave.start_date','employee_leave.end_date','employee_leave.number_of_days','employee_leave.leave_reason','employee_leave.status','employee_leave.comment','employees.first_name','employees.last_name')->get();
+        // dd($employees_leave_info);
+        $employees_leave_info_array_size = $employees_leave_info->count();
+        // dd($employees_leave_info_array_size);
+        return view('admin.employee_leave',compact('employees_leave_info','employees_leave_info_array_size'));
     }
 }
