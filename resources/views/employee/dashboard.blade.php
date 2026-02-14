@@ -58,19 +58,29 @@
                             <table class="table table-hover mb-0 table-bordered">
                                 <thead>
                                     <tr>
-                                        <th scope="col">(#) Id</th>
+                                        <!-- <th scope="col">(#) Id</th> -->
                                         <th scope="col">Date</th>
-                                        <th scope="col">Time</th>
+                                        <th scope="col">Start Time</th>
+                                        <th scope="col">End Time</th>
                                         <th scope="col">Task</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">#16252</th>
-                                        <td>14/10/2018</td>
-                                        <td>$80</td>
-                                        <td>1</td>
-                                    </tr>
+                                    @if ($all_attendance_info_size == 0)
+                                        <tr>
+                                            <td colspan="7" class="text-center">No Records Found</td>
+                                        </tr>
+                                    @else
+                                        @foreach ($all_attendance_info as $each_all_attendance_info)
+                                        <tr>
+                                            <!-- <th scope="row">#16252</th> -->
+                                            <td>{{$each_all_attendance_info->attendace_date}}</td>
+                                            <td>{{$each_all_attendance_info->start_time}}</td>
+                                            <td>{{$each_all_attendance_info->end_time}}</td>
+                                            <td>{{$each_all_attendance_info->reason}}</td>
+                                        </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

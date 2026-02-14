@@ -5,22 +5,7 @@
 @endsection
 
 @push('css')
-    <!-- DataTables -->
-    <link href="{{ asset('vendor/foxia/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} " rel="stylesheet"
-        type="text/css">
-    <link href="{{ asset('vendor/foxia/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }} " rel="stylesheet"
-        type="text/css">
-    <link href="{{ asset('vendor/foxia/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
-        rel="stylesheet" type="text/css">
-
-    <!-- Bootstrap Css -->
-    <link href="{{ asset('vendor/foxia/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css">
-    <!-- Icons Css -->
-    <link href="{{ asset('vendor/foxia/css/icons.min.css') }}" rel="stylesheet" type="text/css">
-    <!-- App Css-->
-    <link href="{{ asset('vendor/foxia/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}">
+    
 @endpush
 
 @section('body')
@@ -45,10 +30,10 @@
                             <div class="col-md-4">
                                 <label class="form-label">Attendance Date</label>
                                 <div class="input-group has-validation">
-                                    <input type="date" class="form-control" id="date" name="attendace_date" required>
+                                    <input type="date" class="form-control" name="attendace_date" required>
                                 </div>
                                 <div class="invalid-feedback">
-                                    Please enter email.
+                                    Please select date.
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -57,27 +42,27 @@
                             <div class="col-md-4">
                                 <label class="form-label">Start Time</label>
                                 <div class="input-group has-validation">
-                                    <input type="date" class="form-control" id="time" name="start_time">
+                                    <input type="time" class="form-control" name="start_time">
                                 </div>
                                 <div class="invalid-feedback">
-                                    Please enter email.
+                                    Please enter start time.
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">End Time</label>
                                 <div class="input-group has-validation">
-                                    <input type="date" class="form-control" id="time" name="end_time">
+                                    <input type="time" class="form-control" name="end_time">
                                 </div>
                                 <div class="invalid-feedback">
-                                    Please enter email.
+                                    Please enter end time.
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label">Reason for Leave</label>
+                                <label class="form-label">Tasks Done</label>
                                 <textarea id="textarea" class="form-control" maxlength="225" rows="3" name="reason"
-                                    placeholder="This textarea has a limit of 225 chars."></textarea>
+                                    placeholder="Please provide what you did."></textarea>
                                 <div class="invalid-feedback">
-                                    Please provide a valid zip.
+                                    Please provide what you did.
                                 </div>
                             </div>
                             <div class="col-12">
@@ -130,74 +115,5 @@
 @endsection
 
 @push('script')
-    <!-- Required datatable js -->
-    <script src="{{ asset('vendor/foxia/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <!-- Buttons examples -->
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/pdfmake/build/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/pdfmake/build/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
-    <!-- Responsive examples -->
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
-    <script>
-        $("#datatable-buttons").DataTable({
-            lengthChange: !1,
-            buttons: ["copy", "excel", "pdf", "colvis"]
-        }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
-    </script>
 
-    {{-- Intializing Flatpickr --}}
-    <script src="{{ asset('js/flatpickr.min.js') }}"></script>
-
-    {{-- Stopping user from applying leave beyond or before the current year and before currentdate --}}
-    <script>
-        var year = new Date().getFullYear();
-        const today = new Date();
-        const earlyThreeDays = new Date(today.setDate(today.getDate() - 3));
-        const company_location = {{ Auth::guard('employee')->user()->company_location }};
-        // console.log(today);
-
-        if (company_location == 0) {
-            flatpickr("#date", {
-                minDate: earlyThreeDays,
-                maxDate: "today",
-                disable: [
-                    function(date) {
-                        // Fridays
-                        return date.getDay() === 5;
-                    },
-                    function(date) {
-                        // Saturdays
-                        return date.getDay() === 6;
-                    }
-                ]
-            });
-        } else {
-            flatpickr("#date", {
-                minDate: earlyThreeDays,
-                maxDate: "today",
-                disable: [
-                    function(date) {
-                        // Sundays
-                        return date.getDay() === 0;
-                    },
-                    function(date) {
-                        // Saturdays
-                        return date.getDay() === 6;
-                    }
-                ]
-            });
-        }
-        flatpickr("#time", {
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-        });
-    </script>
 @endpush

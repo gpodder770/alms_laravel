@@ -9,6 +9,9 @@
         .badge {
             font-size: 16px;
         }
+        .delete_btn {
+            display: inline!important;
+        }
     </style>
 @endpush
 

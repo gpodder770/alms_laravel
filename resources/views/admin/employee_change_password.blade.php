@@ -5,12 +5,6 @@
 @endsection
 
 @push('css')
-    {{-- <style>
-        .alert-danger,
-        .alert-success {
-            margin-bottom: 0px;
-        }
-    </style> --}}
 @endpush
 
 @section('body')

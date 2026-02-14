@@ -77,13 +77,30 @@
                                                 <td>{{ $each_employee_leave_info->comment }}</td>
                                                 <td>
                                                     <ul>
+                                                        @if ($each_employee_leave_info->status == 0)
+                                                        <li><span class="badge bg-warning me-2">Pending</span></li>
                                                         <li>
-                                                            <a href="#" class="btn btn-outline-secondary btn-sm me-2"
+                                                            <a href="{{ route('admin.employee_leave_status_approve', $each_employee_leave_info->employee_leave_id) }}" class="btn btn-outline-secondary btn-sm me-2"
                                                                 title="Accept Leave"><i class="fas fa-check"></i></a>
                                                         </li>
-                                                        <li><a href="#" class="btn btn-outline-secondary btn-sm"
-                                                                title="Deactivate User"><i class="fas fa-times"></i></a>
+                                                        <li><a href="{{ route('admin.employee_leave_status_disapprove', $each_employee_leave_info->employee_leave_id) }}" class="btn btn-outline-secondary btn-sm"
+                                                                title="Disapprove Leave"><i class="fas fa-times"></i></a>
                                                         </li>
+                                                        @elseif ($each_employee_leave_info->status == 1)
+                                                        <li><span class="badge bg-success me-2">APPROVED</span></li>
+                                                        <li>
+                                                            <a href="{{ route('admin.employee_leave_status_disapprove', $each_employee_leave_info->employee_leave_id) }}" class="btn btn-outline-secondary btn-sm me-2"
+                                                                title="Disapprove Leave"><i class="fas fa-times"></i></a>
+                                                        </li>
+                                                        @elseif ($each_employee_leave_info->status == 2)
+                                                        <li><span class="badge bg-danger me-2">DISAPPROVED</span></li>
+                                                        <li>
+                                                            <a href="{{ route('admin.employee_leave_status_approve', $each_employee_leave_info->employee_leave_id) }}" class="btn btn-outline-secondary btn-sm me-2"
+                                                                title="Accept Leave"><i class="fas fa-check"></i></a>
+                                                        </li>
+                                                        @endif
+                                                        
+                                                        
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -91,8 +108,6 @@
                                     @endif
                                 </tbody>
                             </table>
-
-
                         </div>
                     </div>
                 </div>

@@ -56,10 +56,12 @@ class EmployeeController extends Controller
     {
         $holidays = Holidays_view::whereYear('date',Carbon::now()->format('Y'))->whereDate('date', '>=', Carbon::now())->limit(5)->get();
         $holiday_array_size = $holidays->count();
-        // dd($holidays->count());
+        $all_attendance_info = Attendance::where('employee_id',Auth::guard('employee')->user()->id)->whereYear('created_at', Carbon::now()->format('Y'))->latest()->limit(5)->get();
+        $all_attendance_info_size = $all_attendance_info->count();
+        // dd($all_attendance_info);
         $all_leave_info  = EmployeesLeave::whereYear('start_date',Carbon::now()->format('Y'))->latest()->limit(5)->get();
         $all_leave_info_array_size = $all_leave_info->count();
-        return view('employee.dashboard',compact('holidays','holiday_array_size','all_leave_info','all_leave_info_array_size'));
+        return view('employee.dashboard',compact('holidays','holiday_array_size','all_attendance_info','all_attendance_info_size','all_leave_info','all_leave_info_array_size'));
     }
 
     public function profile(){

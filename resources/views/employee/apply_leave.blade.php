@@ -5,30 +5,17 @@
 @endsection
 
 @push('css')
-    <!-- DataTables -->
-    <link href="{{ asset('vendor/foxia/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} " rel="stylesheet"
-        type="text/css">
-    <link href="{{ asset('vendor/foxia/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }} " rel="stylesheet"
-        type="text/css">
-    <link href="{{ asset('vendor/foxia/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
-        rel="stylesheet" type="text/css">
-    <!-- Bootstrap Css -->
-    <link href="{{ asset('vendor/foxia/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css">
-    <!-- Icons Css -->
-    <link href="{{ asset('vendor/foxia/css/icons.min.css') }}" rel="stylesheet" type="text/css">
-    <!-- App Css-->
-    <link href="{{ asset('vendor/foxia/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}">
+
 @endpush
 
 @section('body')
     <div class="container">
         <div class="row">
             <div class="col-xl">
-                <div class="card mini-stats">
-                    <div class="p-3 mini-stats-content">
+                <div class="p-3 card mini-stats">
+                    <div class=" mini-stats-content">
                         <div class="mb-4 text-center">
-                            <h5 style="color: white;">Sick Leave</h5>
+                            <h5 >Sick Leave</h5>
                         </div>
                     </div>
                     <div class="mx-3">
@@ -41,10 +28,10 @@
                 </div>
             </div>
             <div class="col-xl">
-                <div class="card mini-stats">
-                    <div class="p-3 mini-stats-content">
+                <div class="p-3 card mini-stats">
+                    <div class=" mini-stats-content">
                         <div class="mb-4 text-center">
-                            <h5 style="color: white;">Public Leave</h5>
+                            <h5 >Public Leave</h5>
                         </div>
                     </div>
                     <div class="mx-3">
@@ -57,10 +44,10 @@
                 </div>
             </div>
             <div class="col-xl">
-                <div class="card mini-stats">
-                    <div class="p-3 mini-stats-content">
+                <div class="p-3 card mini-stats">
+                    <div class=" mini-stats-content">
                         <div class="mb-4 text-center">
-                            <h5 style="color: white;">Casual Leave</h5>
+                            <h5 >Casual Leave</h5>
                         </div>
                     </div>
                     <div class="mx-3">
@@ -73,10 +60,10 @@
                 </div>
             </div>
             <div class="col-xl">
-                <div class="card mini-stats">
-                    <div class="p-3 mini-stats-content">
+                <div class="p-3 card mini-stats">
+                    <div class=" mini-stats-content">
                         <div class="mb-4 text-center">
-                            <h5 style="color: white;">Special Leave</h5>
+                            <h5 >Special Leave</h5>
                         </div>
                     </div>
                     <div class="mx-3">
@@ -89,10 +76,10 @@
                 </div>
             </div>
             <div class="col-xl">
-                <div class="card mini-stats">
-                    <div class="p-3 mini-stats-content">
+                <div class="p-3 card mini-stats">
+                    <div class=" mini-stats-content">
                         <div class="mb-4 text-center">
-                            <h5 style="color: white;">Earned Leave</h5>
+                            <h5 >Earned Leave</h5>
                         </div>
                     </div>
                     <div class="mx-3">
@@ -142,7 +129,7 @@
                                 <label for="start_date" class="form-label">Start Date<span
                                         style="color:red">*</span></label>
                                 <div class="input-group has-validation">
-                                    <input type="date" class="form-control" id="start_date" name="start_date"
+                                    <input type="date" class="form-control" name="start_date"
                                         required>
                                 </div>
                                 @error('start_date')
@@ -152,7 +139,7 @@
                             <div class="col-md-4">
                                 <label for="end_date" class="form-label">End Date</label>
                                 <div class="input-group has-validation">
-                                    <input type="date" class="form-control" id="end_date" name="end_date"
+                                    <input type="date" class="form-control" name="end_date"
                                         maxDate="new Date(lastDateOfYear)">
                                 </div>
                                 @error('end_date')
@@ -239,103 +226,4 @@
 @endsection
 
 @push('script')
-    <script src="{{ asset('vendor/foxia/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <!-- Buttons examples -->
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/pdfmake/build/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/pdfmake/build/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
-    <!-- Responsive examples -->
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('vendor/foxia/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
-    <script>
-        $("#datatable-buttons").DataTable({
-            lengthChange: !1,
-            buttons: ["copy", "excel", "pdf", "colvis"],
-            ordering: false,
-        }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
-    </script>
-
-    {{-- Intializing Flatpickr --}}
-    <script src="{{ asset('js/flatpickr.min.js') }}"></script>
-
-    {{-- Stopping user from applying leave beyond or before the current year and before currentdate --}}
-    <script>
-        var year = new Date().getFullYear();
-        const company_location = {{ Auth::guard('employee')->user()->company_location }};
-
-        if (company_location == 0) {
-            flatpickr("#start_date", {
-                minDate: "today",
-                maxDate: year + "-12-31",
-                disable: [
-                    function(date) {
-                        // Fridays
-                        return date.getDay() === 5;
-                    },
-                    function(date) {
-                        // Saturdays
-                        return date.getDay() === 6;
-                    }
-                ]
-            });
-            flatpickr("#end_date", {
-                minDate: "today",
-                maxDate: year + "-12-31",
-                disable: [
-                    function(date) {
-                        // Fridays
-                        return date.getDay() === 5;
-                    },
-                    function(date) {
-                        // Saturdays
-                        return date.getDay() === 6;
-                    }
-                ]
-            });
-        }else{
-            flatpickr("#start_date", {
-                minDate: "today",
-                maxDate: year + "-12-31",
-                disable: [
-                    function(date) {
-                        // Sundays
-                        return date.getDay() === 0;
-                    },
-                    function(date) {
-                        // Saturdays
-                        return date.getDay() === 6;
-                    }
-                ]
-            });
-            flatpickr("#end_date", {
-                minDate: "today",
-                maxDate: year + "-12-31",
-                disable: [
-                    function(date) {
-                        // Sundays
-                        return date.getDay() === 0;
-                    },
-                    function(date) {
-                        // Saturdays
-                        return date.getDay() === 6;
-                    }
-                ]
-            });
-        }
-
-        // flatpickr("#start_date", {
-        //     minDate: "today",
-        //     maxDate: year + "-12-31",
-        // });
-        // flatpickr("#end_date", {
-        //     minDate: "today",
-        //     maxDate: year + "-12-31",
-        // });
-    </script>
 @endpush
